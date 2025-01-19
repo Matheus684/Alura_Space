@@ -3,7 +3,6 @@ from django import forms
 #Formulario de login
 
 class LoginForms(forms.Form):
-    
     nome_login = forms.CharField(
         label="Nome de login",
         required=True,
@@ -73,3 +72,23 @@ class CadastroForms(forms.Form):
         }
     )
 )
+    
+    def clean_nome_cadastro(self):
+        nome = self.cleaned_data.get('nome_cadastro')
+        
+        if nome:
+            nome = nome.strip()
+            if " " in nome:
+                raise forms.ValidationError('Espaços não são permitidos nesse campo')
+            else:
+                return nome
+            
+    def clean_senha_2(self):
+        senha_1 = self.cleaned_data.get('senha_1')
+        senha_2 = self.cleaned_data.get('senha_2')
+        
+        if senha_1 and senha_2:
+            if senha_1 != senha_2:
+                raise forms.ValidationError('As senhas não são iguais')
+            else:
+                return senha_2
