@@ -91,4 +91,8 @@ class CadastroForms(forms.Form):
             if senha_1 != senha_2:
                 raise forms.ValidationError('As senhas não são iguais')
             else:
+<<<<<<< HEAD:apps/usuarios/forms.py
                 return senha_2
+=======
+                return senha_2
+>>>>>>> 5c51dda87eb777f9468bfe3916f8f9c7329be9eb:usuarios/forms.py
