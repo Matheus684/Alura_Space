@@ -1,98 +1,91 @@
 from django import forms
 
-#Formulario de login
-
 class LoginForms(forms.Form):
-    nome_login = forms.CharField(
-        label="Nome de login",
-        required=True,
+    nome_login=forms.CharField(
+        label='Nome de Login', 
+        required=True, 
         max_length=100,
         widget=forms.TextInput(
             attrs={
-                "class": 'form-control',
-                "placeholder": 'EX.: João Silva'
+                'class': 'form-control',
+                'placeholder': 'Ex.: João Silva',
             }
         )
     )
-    senha = forms.CharField(
-        label="Senha",
-        required=True,
+    senha=forms.CharField(
+        label='Senha', 
+        required=True, 
         max_length=70,
         widget=forms.PasswordInput(
             attrs={
-                "class": 'form-control',
-                "placeholder": 'EX.: Digite sua senha'
+                'class': 'form-control',
+                'placeholder': 'Digite a sua senha',
             }
-        )
+        ),
     )
-    
+
 class CadastroForms(forms.Form):
-    
-    nome_cadastro = forms.CharField(
-        label='Nome de cadastro',
-        required=True,
+    nome_cadastro=forms.CharField(
+        label='Nome de Cadastro', 
+        required=True, 
         max_length=100,
         widget=forms.TextInput(
             attrs={
-                "class":"form-control",
-                "placeholder": 'Ex.: João Silva'
-                }
+                'class': 'form-control',
+                'placeholder': 'Ex.: João Silva',
+            }
         )
     )
-    email = forms.EmailField(
+    email=forms.EmailField(
         label='Email',
         required=True,
         max_length=100,
         widget=forms.EmailInput(
             attrs={
-                'class':'form-control',
-                'placeholder': 'Ex.: joaosilva@gmail.com'
+                'class': 'form-control',
+                'placeholder': 'Ex.: joaosilva@xpto.com',
             }
         )
     )
-    senha_1 = forms.CharField(
-    label="Senha",
-    required=True,
-    max_length=70,
-    widget=forms.PasswordInput(
-        attrs={
-            "class": 'form-control',
-            "placeholder": 'Digite sua senha'
+    senha_1=forms.CharField(
+        label='Senha', 
+        required=True, 
+        max_length=70,
+        widget=forms.PasswordInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Digite a sua senha',
             }
-        )
+        ),
     )
-    senha_2 = forms.CharField(
-    label="Confirme sua senha",
-    required=True,
-    max_length=70,
-    widget=forms.PasswordInput(
-        attrs={
-            "class": 'form-control',
-            "placeholder": 'Digite sua senha novamente'
-        }
+    senha_2=forms.CharField(
+        label='Confirme a sua senha', 
+        required=True, 
+        max_length=70,
+        widget=forms.PasswordInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Digite a sua senha novamente',
+            }
+        ),
     )
-)
-    
+
     def clean_nome_cadastro(self):
         nome = self.cleaned_data.get('nome_cadastro')
-        
+
         if nome:
             nome = nome.strip()
-            if " " in nome:
+            if ' ' in nome:
                 raise forms.ValidationError('Espaços não são permitidos nesse campo')
             else:
                 return nome
-            
+
     def clean_senha_2(self):
         senha_1 = self.cleaned_data.get('senha_1')
         senha_2 = self.cleaned_data.get('senha_2')
-        
+
         if senha_1 and senha_2:
             if senha_1 != senha_2:
-                raise forms.ValidationError('As senhas não são iguais')
+                raise forms.ValidationError('Senhas não são iguais')
             else:
-<<<<<<< HEAD:apps/usuarios/forms.py
                 return senha_2
-=======
-                return senha_2
->>>>>>> 5c51dda87eb777f9468bfe3916f8f9c7329be9eb:usuarios/forms.py

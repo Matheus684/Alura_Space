@@ -62,8 +62,4 @@ def cadastro(request):
 def logout(request):
     auth.logout(request)
     messages.success(request, 'Logout efetuado com sucesso')
-<<<<<<< HEAD:apps/usuarios/views.py
     return redirect('login')
-=======
-    return redirect('login')
->>>>>>> 5c51dda87eb777f9468bfe3916f8f9c7329be9eb:usuarios/views.py
